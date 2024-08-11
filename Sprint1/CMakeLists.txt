@@ -1,20 +1,18 @@
 cmake_minimum_required(VERSION 3.8)
-project(my_opencv_demo)
+project(laserscan_listener_republisher)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(cv_bridge REQUIRED)
-find_package(image_transport REQUIRED)
-find_package(OpenCV REQUIRED)
 
-add_executable(minimal_opencv_ros2 minimal_opencv_ros2_node.cpp)
-ament_target_dependencies(minimal_opencv_ros2 rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
+
+add_executable(laserscan_listener_republisher laserscan_listener_republisher.cpp)
+ament_target_dependencies(laserscan_listener_republisher rclcpp std_msgs sensor_msgs)
 
 install(TARGETS
-   minimal_opencv_ros2
+   laserscan_listener_republisher
    DESTINATION lib/${PROJECT_NAME}
  )
 
