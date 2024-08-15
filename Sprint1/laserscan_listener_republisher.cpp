@@ -17,15 +17,19 @@ public:
 
 private:
   void laserscan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
+    
+    int n = 3;
   
     sensor_msgs::msg::LaserScan modified_scan = *msg;
     modified_scan.ranges.clear();
     modified_scan.intensities.clear();
-    for (size_t i = 0; i < msg->ranges.size(); i += 3) {
+    modified_scan.angle_min = msg->angle_min;
+    modified_scan.angle_max = msg->angle_max;
+    modified_scan.angle_increment = msg->angle_increment*n;
+    
+    for (int i = 0; i < msg->ranges.size(); i += n) {
       modified_scan.ranges.push_back(msg->ranges[i]);
-      if (!msg->intensities.empty()) {
-        modified_scan.intensities.push_back(msg->intensities[i]);
-      }
+      modified_scan.intensities.push_back(msg->intensities[i]);
     }
     publisher_->publish(modified_scan);
     std::cout << "ORIGINAL SCAN: " << msg->ranges.size() << " ";
