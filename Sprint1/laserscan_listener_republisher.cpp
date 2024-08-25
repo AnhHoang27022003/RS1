@@ -18,7 +18,7 @@ public:
 private:
   void laserscan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
     
-    int n = 3;
+    int n = 10;
   
     sensor_msgs::msg::LaserScan modified_scan = *msg;
     modified_scan.ranges.clear();
